@@ -1,0 +1,37 @@
+{
+  "name": "electron-youtube-mini-player",
+  "version": "0.0.1",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "build": "tsc && copyfiles -u 1 \"src/**/*.{html,css}\" dist/",
+    "dev": "npm run build && electron .",
+    "start": "electron ."
+  },
+  "author": "saumya",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "electron-log": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.4.38",
+    "@types/node": "^25.4.0",
+    "copyfiles": "^2.4.1",
+    "electron": "^35.7.5",
+    "electron-builder": "^24.13.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "build": {
+    "appId": "com.example.mini-youtube-player",
+    "files": [
+      "**/*"
+    ],
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    }
+  }
+}

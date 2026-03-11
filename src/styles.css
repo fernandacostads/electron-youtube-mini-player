@@ -1,0 +1,127 @@
+body {
+  -webkit-app-region: drag;
+  height: 100vh;
+  /* Makes the entire window draggable */
+  user-select: none;
+  /* Prevents accidental text selection */
+
+  background-color: #111;
+  overflow-y: auto; /* Enables scrolling */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Hides scroll bar*/
+}
+
+button {
+  -webkit-app-region: no-drag;
+  /* Enables button interactions */
+  cursor: pointer;
+}
+
+input {
+  -webkit-app-region: no-drag;
+  /* Enables button interactions */
+  cursor: pointer;
+}
+
+#title-bar {
+  -webkit-app-region: drag;
+  height: 12px;
+  background: #111;
+  color: white;
+  display: flex;
+  justify-content: right;
+  padding: 5px;
+}
+
+#content-part {
+  overflow: hidden;
+  height: 100%;
+}
+
+/*   CLOSE BUTTON   */
+
+#close-button {
+  -webkit-app-region: no-drag;
+  background: transparent;
+  color: #b2ffff;
+  color: #b2ffff;
+  padding: 3px 6px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#close-button:hover {
+  color: #b2ffff;
+  color: #b2ffff;
+  color: black;
+}
+
+/* SEARCH AREA */
+
+#search {
+  margin-left: 1.5rem;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: none;
+  height: 25px;
+  width: 70%;
+  outline: none;
+  display: inline-block;
+  background-color: #1c1c1c;
+  color: #b2ffff;
+}
+
+#search-button {
+  background-color: #111;
+  color: #b2ffff;
+  border: none;
+  box-shadow: none;
+  width: 30px;
+  height: 30px;
+  font-size: 25px;
+}
+
+#search-button:hover {
+  color: rgb(6, 84, 113);
+}
+
+/* RESULTS AREA  */
+
+#results::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* #results{
+    /* max-height: 50vh; */
+
+#results {
+  margin-top: 10px;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#results button {
+  background-color: #282c34;
+  color: rgb(170, 215, 217);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  text-align: center;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+}
+
+#results button:hover {
+  background-color: #38404f;
+  transform: scale(1.02);
+}

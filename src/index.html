@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <title>YT Mini Player</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script defer src="./renderer/renderer.js"></script>
+    <script>
+      const params = new URLSearchParams(location.search);
+      const video = params.get("v");
+
+      document.getElementById("player").src =
+        `https://www.youtube-nocookie.com/embed/${video}?autoplay=1&rel=0`;
+    </script>
+  </head>
+
+  <body>
+    <div id="title-bar">
+      <span> <button id="close-button">✖</button></span>
+    </div>
+    <div id="content-part">
+      <input type="text" spellcheck="false" id="search-input" placeholder="" />
+      <button id="search-button">⌕</button>
+      <div id="results"></div>
+      <iframe
+        referrerpolicy="origin"
+        id="player"
+        width="560"
+        height="315"
+        frameborder="0"
+        allow="autoplay; encrypted-media; fullscreen"
+      ></iframe>
+    </div>
+  </body>
+</html>
