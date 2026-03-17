@@ -158,9 +158,6 @@ function playMusic(videoId: string): void {
   searchButton.style.display = "none";
   titleBar.style.display = "none";
 
-  player.style.width = "100%";
-  player.style.height = "100vh";
-
   if (playerInstance && typeof playerInstance.loadVideoById === "function") {
     try {
       playerInstance.loadVideoById(videoId);

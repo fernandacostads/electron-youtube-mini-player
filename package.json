@@ -1,6 +1,6 @@
 {
   "name": "electron-youtube-mini-player",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/main/main.js",
   "scripts": {
     "build": "tsc && copyfiles -u 1 \"src/**/*.{html,css}\" dist/",
@@ -24,7 +24,7 @@
     "typescript": "^5.9.3"
   },
   "build": {
-    "appId": "com.example.mini-youtube-player",
+    "appId": "com.fernandacostads.mini-youtube-player",
     "files": [
       "**/*"
     ],

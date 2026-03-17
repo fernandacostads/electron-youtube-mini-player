@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import dotenv from "dotenv";
 import path from "path";
 
@@ -10,8 +10,14 @@ let mainWindow: BrowserWindow | null = null;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 600,
+    width: 400,
+    height: 250,
+    alwaysOnTop: true,
+    frame: false,
+    transparent: true,
+    resizable: true,
+    skipTaskbar: true,
+    fullscreenable: false,
     webPreferences: {
       preload: path.join(__dirname, "../preload/preload.js"),
       nodeIntegration: false,
@@ -23,8 +29,6 @@ function createWindow() {
   const indexPath = path.join(__dirname, "../index.html");
 
   mainWindow.loadFile(indexPath);
-
-  // User Agent para evitar bloqueios do YouTube
   mainWindow.webContents.setUserAgent(
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
   );
@@ -48,4 +52,8 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
+});
+
+ipcMain.on("close-app", () => {
+  app.quit();
 });
