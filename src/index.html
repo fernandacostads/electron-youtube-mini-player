@@ -8,41 +8,71 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="https://www.youtube.com/iframe_api"></script>
     <script defer src="./renderer/renderer.js"></script>
-    <script>
-      const params = new URLSearchParams(location.search);
-      const video = params.get("v");
-
-      document.getElementById("player").src =
-        `https://www.youtube-nocookie.com/embed/${video}?autoplay=1&rel=0`;
-    </script>
   </head>
-
   <body>
-    <!-- <div id="title-bar">
-      <span> <button id="close-button">✖</button></span>
-    </div>
-    <div id="content-part">
-      <input type="text" spellcheck="false" id="search-input" placeholder="" />
-      <button id="search-button">⌕</button>
-      <div id="results"></div>
+    <div id="app">
       <iframe
-        referrerpolicy="origin"
         id="player"
+        referrerpolicy="origin"
         frameborder="0"
         allow="autoplay; encrypted-media; fullscreen"
       ></iframe>
-    </div> -->ß
-    <div id="app">
-      <iframe id="player"></iframe>
       <div id="top-hover-area"></div>
-
       <div id="top-bar">
-        <div id="title-bar">Mini Player</div>
-        <input id="search-input" placeholder="Search..." />
-        <button id="search-button">Search</button>ß
-        <button id="close-button">✕</button>
+        <div id="title-bar">
+          <div class="logo">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 64 64"
+              fill="white"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 30 L20 10 L30 24 L34 20 L44 10 L52 30 
+           Q50 48 32 52 Q14 48 12 30 Z"
+              />
+              <circle cx="25" cy="36" r="2" fill="black" />
+              <circle cx="39" cy="36" r="2" fill="black" />
+            </svg>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 64 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="32" cy="36" r="16" stroke="white" stroke-width="3" />
+              <path
+                d="M20 22 L26 10 L30 22"
+                stroke="white"
+                stroke-width="3"
+                fill="none"
+              />
+              <path
+                d="M44 22 L38 10 L34 22"
+                stroke="white"
+                stroke-width="3"
+                fill="none"
+              />
+              <circle cx="26" cy="36" r="2" fill="white" />
+              <circle cx="38" cy="36" r="2" fill="white" />
+              <circle cx="32" cy="42" r="2" fill="white" />
+            </svg>
+          </div>
+          <span class="app-title"></span>
+        </div>
+        <div class="search-container">
+          <input
+            id="search-input"
+            type="text"
+            spellcheck="false"
+            placeholder="Search vídeo..."
+          />
+          <button id="search-button">⌕</button>
+          <button id="close-button">×</button>
+        </div>
       </div>
-
       <div id="results"></div>
     </div>
   </body>
