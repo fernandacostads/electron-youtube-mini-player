@@ -74,9 +74,25 @@ closeButton.addEventListener("click", () => {
   window.electronAPI.closeApp();
 });
 
+function extractYouTubeId(input: string): string | null {
+  const regex =
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)?([a-zA-Z0-9_-]{11})/;
+
+  const match = input.match(regex);
+
+  return match ? match[1] : null;
+}
+
 async function searchMusic() {
   const query = searchInput.value.trim();
   if (!query) return;
+
+  const videoId = extractYouTubeId(query);
+
+  if (videoId) {
+    playMusic(videoId);
+    return;
+  }
 
   resultsDiv.style.display = "block";
   resultsDiv.innerHTML = "";
