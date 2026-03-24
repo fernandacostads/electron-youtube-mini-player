@@ -16,14 +16,12 @@ let isPlaying = false;
 let hideTimeout: any = null;
 let isInteracting = false;
 
-window.currentVideoId = null;
-const API_KEY = window.env.youtubeApiKey;
+(window as any).currentVideoId = null;
+const API_KEY = (window as any).env.youtubeApiKey;
 
 function showUI() {
   topBar.classList.remove("hidden");
-
   if (hideTimeout) clearTimeout(hideTimeout);
-
   if (isPlaying && !isInteracting) {
     hideTimeout = setTimeout(() => {
       hideUI();
@@ -36,10 +34,7 @@ function hideUI() {
   topBar.classList.add("hidden");
 }
 
-topHoverArea.addEventListener("mouseenter", () => {
-  showUI();
-});
-
+topHoverArea.addEventListener("mouseenter", showUI);
 topHoverArea.addEventListener("mouseleave", () => {
   if (hideTimeout) clearTimeout(hideTimeout);
 
@@ -60,18 +55,14 @@ searchInput.addEventListener("blur", () => {
   showUI();
 });
 
-searchInput.addEventListener("input", () => {
-  showUI();
-});
-
+searchInput.addEventListener("input", showUI);
 searchButton.addEventListener("click", searchMusic);
-
 searchInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") searchMusic();
 });
 
 closeButton.addEventListener("click", () => {
-  window.electronAPI.closeApp();
+  (window as any).electronAPI.closeApp();
 });
 
 function extractYouTubeId(input: string): string | null {
@@ -79,25 +70,34 @@ function extractYouTubeId(input: string): string | null {
     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)?([a-zA-Z0-9_-]{11})/;
 
   const match = input.match(regex);
+  return match ? match[1] : null;
+}
 
+function extractPlaylistId(input: string): string | null {
+  const regex = /[?&]list=([a-zA-Z0-9_-]+)/;
+  const match = input.match(regex);
   return match ? match[1] : null;
 }
 
 async function searchMusic() {
   const query = searchInput.value.trim();
   if (!query) return;
-
+  const playlistId = extractPlaylistId(query);
+  if (playlistId) {
+    loadPlaylist(playlistId);
+    return;
+  }
   const videoId = extractYouTubeId(query);
-
   if (videoId) {
     playMusic(videoId);
     return;
   }
-
   resultsDiv.style.display = "block";
   resultsDiv.innerHTML = "";
 
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&q=${encodeURIComponent(query)}&key=${API_KEY}`;
+  const url =
+    `https://www.googleapis.com/youtube/v3/search?` +
+    `part=snippet&type=video&maxResults=10&q=${encodeURIComponent(query)}&key=${API_KEY}`;
 
   const res = await fetch(url);
   const data = await res.json();
@@ -105,11 +105,34 @@ async function searchMusic() {
   data.items.forEach((item: any) => {
     const btn = document.createElement("button");
     btn.innerText = item.snippet.title;
-
     btn.onclick = () => {
       playMusic(item.id.videoId);
     };
+    resultsDiv.appendChild(btn);
+  });
+  isPlaying = false;
+  showUI();
+}
 
+async function loadPlaylist(playlistId: string) {
+  resultsDiv.style.display = "block";
+  resultsDiv.innerHTML = "";
+
+  const url =
+    `https://www.googleapis.com/youtube/v3/playlistItems?` +
+    `part=snippet&maxResults=25&playlistId=${playlistId}&key=${API_KEY}`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  data.items.forEach((item: any) => {
+    const title = item.snippet.title;
+    const videoId = item.snippet.resourceId.videoId;
+    const btn = document.createElement("button");
+    btn.innerText = title;
+    btn.onclick = () => {
+      playMusic(videoId);
+    };
     resultsDiv.appendChild(btn);
   });
 
@@ -118,14 +141,10 @@ async function searchMusic() {
 }
 
 function playMusic(videoId: string) {
-  window.currentVideoId = videoId;
-
+  (window as any).currentVideoId = videoId;
   resultsDiv.style.display = "none";
-
   player.src = `https://youtube-relay.fernandacostadev.workers.dev/?v=${videoId}&autoplay=1`;
-
   isPlaying = true;
-
   showUI();
 }
 
