@@ -5,21 +5,30 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-supported-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-A minimalist floating desktop music player built with **Electron** that allows you to search and play embeddable YouTube videos in a distraction-free window.
+A lightweight floating YouTube music player built with Electron + TypeScript.
 
-This project focuses on simplicity, performance, and a clean user experience.
+This desktop application allows you to search and play YouTube videos in a minimal floating window, designed to stay out of the way while you work.
+
+The project focuses on simplicity, performance, and a distraction-free experience.
 
 ---
 
 # Features
 
-- Search videos using **YouTube Data API v3**
-- Play videos inside a **mini embedded player**
-- Filters out **non-embeddable or restricted videos**
-- Minimalist interface
-- Responsive video player that adjusts to window size
-- Cross-platform desktop app (**Windows, macOS, Linux**)
-- Graceful fallback when videos cannot be embedded
+- 🔎 Search videos using **YouTube Data API v3**
+- ▶️ Play videos inside a **mini embedded player**
+- 🚫 Filters out **non-embeddable or restricted videos**
+- 🪟 Minimalist interface
+- 📐 Responsive video player that adjusts to window size
+- 💻 Cross-platform desktop app (**Windows, macOS, Linux**)
+- ⚡ Graceful fallback when videos cannot be embedded
+
+---
+
+# Preview
+
+Demo
+(Screenshots will be added soon)
 
 ---
 
@@ -49,7 +58,7 @@ src
 Clone the repository
 
 ```
-git clone https://github.com/your-username/electron-youtube-mini-player.git
+git clone https://github.com/fernandacostds/electron-youtube-mini-player.git
 ```
 
 Navigate into the project
@@ -91,7 +100,7 @@ YouTube Data API v3
 Build TypeScript files
 
 ```
-npm run build
+npm run compile
 ```
 
 Run the Electron app
@@ -107,10 +116,20 @@ npm run dev
 To generate desktop executables:
 
 ```
-npx electron-builder
+npx run dist
 ```
 
-This will create installers for supported platforms.
+he generated files will appear in:
+
+dist/
+
+Example output:
+
+dist
+├ yt-mini-player-0.0.3.exe
+├ yt-mini-player-0.0.3.AppImage
+├ yt-mini-player-0.0.3.deb
+├ yt-mini-player-0.0.3-mac.zip
 
 ---
 
