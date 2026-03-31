@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YouTube Relay</title>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: black;
+        overflow: hidden;
+      }
+      body {
+        position: fixed;
+        width: 100%;
+      }
+
+      iframe {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <iframe
+      id="player"
+      allow="autoplay; encrypted-media; fullscreen"
+      allowfullscreen
+    ></iframe>
+
+    <script>
+      const params = new URLSearchParams(location.search);
+      const video = params.get("v");
+
+      if (!video) {
+        document.body.innerHTML = "Missing video id";
+      } else {
+        document.getElementById("player").src =
+          `https://www.youtube-nocookie.com/embed/${video}?autoplay=1&rel=0`;
+      }
+    </script>
+  </body>
+</html>
