@@ -120,11 +120,12 @@ input {
   display: flex;
   align-items: center;
   gap: 6px;
+  position: relative;
 }
 
 #search-input {
-  width: 150px;
-  padding: 6px 10px;
+  width: 190px;
+  padding: 6px 28px 6px 10px;
   border-radius: 8px;
   border: none;
   background: rgba(255, 255, 255, 0.08);
@@ -144,12 +145,13 @@ input {
 }
 
 #search-button {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border: none;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.12);
   color: white;
+  margin-left: 4px;
   padding: 6px 8px;
   font-size: 16px;
   display: flex;
@@ -166,6 +168,30 @@ input {
 
 #search-button:active {
   transform: scale(0.95);
+}
+
+#clear-search {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+
+  font-size: 12px;
+  opacity: 0.6;
+  cursor: pointer;
+
+  display: none;
+  padding: 0;
+
+  transition: opacity 0.2s;
+}
+
+#clear-search:hover {
+  color: white;
 }
 
 #results {

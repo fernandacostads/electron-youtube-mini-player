@@ -11,6 +11,9 @@ const topBar = document.getElementById("top-bar") as HTMLDivElement;
 const topHoverArea = document.getElementById(
   "top-hover-area",
 ) as HTMLDivElement;
+const clearSearch = document.getElementById(
+  "clear-search",
+) as HTMLButtonElement;
 
 let isPlaying = false;
 let hideTimeout: any = null;
@@ -55,7 +58,16 @@ searchInput.addEventListener("blur", () => {
   showUI();
 });
 
-searchInput.addEventListener("input", showUI);
+// searchInput.addEventListener("input", showUI);
+searchInput.addEventListener("input", () => {
+  showUI();
+
+  if (searchInput.value.length > 0) {
+    clearSearch.style.display = "block";
+  } else {
+    clearSearch.style.display = "none";
+  }
+});
 searchButton.addEventListener("click", searchMusic);
 searchInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") searchMusic();
@@ -63,6 +75,16 @@ searchInput.addEventListener("keydown", (e) => {
 
 closeButton.addEventListener("click", () => {
   (window as any).electronAPI.closeApp();
+});
+
+clearSearch.addEventListener("click", () => {
+  searchInput.value = "";
+  resultsDiv.innerHTML = "";
+  resultsDiv.style.display = "none";
+
+  clearSearch.style.display = "none";
+
+  searchInput.focus();
 });
 
 function extractYouTubeId(input: string): string | null {

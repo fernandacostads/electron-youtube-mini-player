@@ -2,7 +2,10 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import dotenv from "dotenv";
 import path from "path";
 
-dotenv.config();
+// dotenv.config();
+dotenv.config({
+  path: path.join(__dirname, "../../.env"),
+});
 
 const API_KEY = process.env.YOUTUBE_API_KEY;
 
@@ -18,6 +21,7 @@ function createWindow() {
     resizable: true,
     skipTaskbar: true,
     fullscreenable: false,
+    icon: path.join(__dirname, "../../build/icon.ico"),
     webPreferences: {
       preload: path.join(__dirname, "../preload/preload.js"),
       nodeIntegration: false,

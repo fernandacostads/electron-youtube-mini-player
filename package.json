@@ -1,12 +1,13 @@
 {
   "name": "electron-youtube-mini-player",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/main/main.js",
   "scripts": {
-    "build": "tsc && copyfiles -u 1 \"src/**/*.{html,css}\" dist/",
-    "dev": "npm run build && electron .",
-    "start": "electron ."
-  },
+  "compile": "tsc && copyfiles -u 1 \"src/**/*.{html,css}\" dist/",
+  "dev": "npm run compile && electron .",
+  "start": "electron .",
+  "dist": "npm run compile && electron-builder"
+},
   "author": "saumya",
   "license": "ISC",
   "description": "",
@@ -24,14 +25,35 @@
     "typescript": "^5.9.3"
   },
   "build": {
-    "appId": "com.fernandacostads.mini-youtube-player",
-    "files": [
-      "**/*"
+  "appId": "com.fernandacostads.mini-youtube-player",
+  "productName": "YT Mini Player",
+  "directories": {
+    "buildResources": "build"
+  },
+
+  "files": [
+    "dist/**/*",
+    "node_modules/**/*",
+    ".env"
+  ],
+
+  "win": {
+    "target": "nsis",
+    "icon": "build/icon.ico"
+  },
+
+  "mac": {
+    "target": "zip",
+    "icon": "build/icon.png"
+  },
+
+  "linux": {
+    "target": [
+      "AppImage",
+      "deb"
     ],
-    "mac": {
-      "target": [
-        "dmg"
-      ]
-    }
+    "icon": "build/icon.png",
+    "category": "AudioVideo"
   }
+}
 }
